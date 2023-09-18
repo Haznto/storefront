@@ -3,9 +3,11 @@ import React from 'react'
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
-export default function Header() {
+function Header(props) {
+    console.log(props)
     return (
         <AppBar position='static' color='secondary'>
             <Toolbar>
@@ -14,10 +16,14 @@ export default function Header() {
 
                 <Typography variant='h6' component={'div'} sx={{ flexGrow: 1 }}>Hasan's Store</Typography>
                 <Stack>
-                    <IconButton component={Link} to='/cart' color='inherit'><ShoppingCartOutlinedIcon fontSize='medium' /></IconButton>
+                    <IconButton component={Link} to='/cart' color='inherit'><ShoppingCartOutlinedIcon fontSize='medium' /> ( {props.cart.cart.length} )</IconButton>
                 </Stack>
             </Toolbar>
 
         </AppBar>
     )
 }
+const mapStateToProps = state => ({
+    cart: state.cartReducer
+})
+export default connect(mapStateToProps)(Header)
