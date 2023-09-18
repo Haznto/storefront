@@ -2,10 +2,22 @@ import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } fr
 import React from 'react'
 import { connect } from 'react-redux'
 import { setActiveCategory, setCategories, setProducts, setRenderList } from '../Reducers/CategoryReducer'
+import { addToCart, removeFromCart } from '../Reducers/CartReducer'
 
 
 function Product(props) {
+    // console.log(props)
 
+    function handleAddToCart(product) {
+        console.log(product)
+        let found = props.cart.cart.filter(element => element.name === product.name)
+        console.log(found)
+        if (!found[0]) {
+
+            props.addToCart(product)
+        }
+        else return
+    }
     return (
 
         <Box bgcolor={'#eeeeee'} width={'300px'}>
@@ -20,14 +32,15 @@ function Product(props) {
                     }
                 }>
                     <Typography variant='h5'>{props.product.name}</Typography>
-                    <Typography variant='body1'>Price: {props.price} inStock :{props.inStock}</Typography>
+                    <Typography variant='body1'>Price: {props.price}$</Typography>
+                    <Typography variant='body1'>Stock: {props.inStock}</Typography>
                 </CardContent>
                 <CardActions sx={
                     {
                         justifyContent: 'center'
                     }
                 } >
-                    <Button color={'secondary'}>Add to Cart</Button>
+                    <Button onClick={() => handleAddToCart(props.product)} color={'secondary'}>Add to Cart</Button>
                     <Button color={'secondary'}>More Details</Button>
                 </CardActions>
             </Card>
@@ -36,12 +49,16 @@ function Product(props) {
     )
 }
 const mapStateToProps = state => ({
-    productManager: state
+    productManager: state.categoryReducer,
+    cart: state.cartReducer
+
 })
 const mapDispatchToProps = {
     setActiveCategory,
     setCategories,
     setProducts,
-    setRenderList
+    setRenderList,
+    addToCart,
+    removeFromCart
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Product)

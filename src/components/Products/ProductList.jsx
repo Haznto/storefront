@@ -45,7 +45,7 @@ function ProductList(props) {
             }
         }
         setToRenderProducts()
-    }, [props.productManager.categoryReducer.activeCategory])
+    }, [props.productManager.categoryReducer.activeCategory, props.productManager.categoryReducer.products])
 
     return (
         <div style={{ minHeight: '70vh' }}>
