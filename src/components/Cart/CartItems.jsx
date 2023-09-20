@@ -5,15 +5,8 @@ import { setActiveCategory, setCategories, setProducts, setRenderList } from '..
 import { addToCart, removeFromCart } from '../Reducers/CartReducer'
 
 
-function Product(props) {
-    function handleAddToCart(product) {
-        let found = props.cart.cart.filter(element => element.name === product.name)
-        if (!found[0]) {
+function CartItem(props) {
 
-            props.addToCart(product)
-        }
-        else return
-    }
     return (
 
         <Box bgcolor={'#eeeeee'} width={'300px'}>
@@ -36,7 +29,7 @@ function Product(props) {
                         justifyContent: 'center'
                     }
                 } >
-                    <Button onClick={() => handleAddToCart(props.product)} color={'secondary'}>Add to Cart</Button>
+                    <Button onClick={() => props.removeFromCart(props.product)} color={'secondary'}>Remove From Cart</Button>
                     <Button color={'secondary'}>More Details</Button>
                 </CardActions>
             </Card>
@@ -57,4 +50,4 @@ const mapDispatchToProps = {
     addToCart,
     removeFromCart
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Product)
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem)

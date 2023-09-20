@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 
 
 function Header(props) {
-    console.log(props)
     return (
         <AppBar position='static' color='secondary'>
             <Toolbar>
