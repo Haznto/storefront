@@ -1,10 +1,11 @@
+import axios from "axios"
+
 export let initialState = {
     cart: []
 }
 
 
 export function cartReducer(state = initialState, action) {
-    // console.log(action)
     switch (action.type) {
 
         case 'ADD-TO-CART': {
@@ -21,14 +22,29 @@ export function cartReducer(state = initialState, action) {
     }
 }
 
-export const addToCart = (payload) => {
-    console.log(payload)
+export const addToCart = (product) => async dispatch => {
+    let updatedProduct = { inStock: product.inStock - 1 };
+    let url = `https://api-js401.herokuapp.com/api/v1/products/${product._id}`;
+    let results = await axios.put(url, updatedProduct)
+    let record = results.data;
+    dispatch(add(record));
+};
+
+export const removeFromCart = (product) => async dispatch => {
+    let updatedProduct = { inStock: product.inStock + 1 };
+    let url = `https://api-js401.herokuapp.com/api/v1/products/${product._id}`;
+    let results = await axios.put(url, updatedProduct)
+    let record = results.data
+    dispatch(remove(record));
+};
+
+export const add = (payload) => {
     return {
         type: 'ADD-TO-CART',
         payload: payload
     }
 }
-export const removeFromCart = (payload) => {
+export const remove = (payload) => {
     return {
         type: 'REMOVE-FROM-CART',
         payload: payload

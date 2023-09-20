@@ -13,7 +13,6 @@ import { removeFromCart } from '../Reducers/CartReducer';
 
 
 function TemporaryDrawer({ cart, removeFromCart }) {
-    console.log(cart.cart)
     const [state, setState] = React.useState({ right: false });
 
     const toggleDrawer = (anchor, open) => (event) => {
