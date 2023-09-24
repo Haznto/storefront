@@ -6,8 +6,10 @@ This application is meant to provide a service for the user to browse products b
 
 ![UML](./assets/UML.PNG)
 
-SandBox Link: Phase 1 <https://v3wzvn.csb.app/>
+SandBox Link: Phase 1 <https://v3wzvn.csb.app/> now it's replaced with last Phase
 
 SandBox Link: Phase 2 <https://57kckj.csb.app/>
 
 SandBox Link: Phase 3 <https://7z4vfz.csb.app/>
+
+SandBox Link: Phase 4 <https://v3wzvn.csb.app/>
