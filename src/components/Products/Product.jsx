@@ -3,13 +3,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { setActiveCategory, setCategories, setProducts, setRenderList } from '../Reducers/CategoryReducer'
 import { addToCart, removeFromCart } from '../Reducers/CartReducer'
+import { Link } from 'react-router-dom'
 
 
 function Product(props) {
     function handleAddToCart(product) {
+        console.log(product)
+        console.log(props.cart.cart)
         let found = props.cart.cart.filter(element => element.name === product.name)
         if (!found[0]) {
-
+            
             props.addToCart(product)
         }
         else return
@@ -37,7 +40,7 @@ function Product(props) {
                     }
                 } >
                     <Button onClick={() => handleAddToCart(props.product)} color={'secondary'}>Add to Cart</Button>
-                    <Button color={'secondary'}>More Details</Button>
+                    <Button color={'secondary'} component={Link} to={`/product/${props.product._id}`} >More Details</Button>
                 </CardActions>
             </Card>
         </Box>
